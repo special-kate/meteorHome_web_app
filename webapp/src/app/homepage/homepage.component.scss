@@ -1,0 +1,50 @@
+  .main{
+    background:transparent;
+    position: absolute;
+    background-size: cover;
+    background-position:bottom;
+    left:0%;
+    width: 100%;
+    height: 100%;
+    color:black;
+    font-weight: normal;
+    text-align: center;
+  }
+
+  .margin-top-10{
+    margin-top: 10%;
+  }
+
+  .margin-top-1{
+    margin-top: 1%;
+  }
+
+  .bg-trans-dark{
+    background-color: rgba(0,0,0,0.5);
+  }
+
+  .search{
+    width:40%;
+    height:6%;
+    border-radius: 15px;
+    background-color: rgba(0,0,0,0.3);
+    color:white;
+  }
+
+  .footer{
+    bottom:0;
+    color: white;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+  }
+
+  input::-webkit-input-placeholder {
+    color: white!important;
+  }
+
+  a{
+    color:white!important;
+    font-weight: bold;
+  }
+

@@ -1,0 +1,32 @@
+body{
+    margin: 0;
+}
+
+.mainbody{
+    background-image: url("/assets/imgs/homepage3.jpg");
+    position: absolute;
+    background-size: cover;
+    background-position:bottom;
+    left:0%;
+    width: 100%;
+    height: 100%;
+    color:black;
+    font-weight: normal;
+}
+
+  a,a:visited,a:hover {
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  button,a,input,select,button:hover, a:hover, input:hover, select:hover{
+    cursor: pointer;
+  }
+
+  h1{
+    font-size: 3.5em;
+  }
+
+  h1,  h2,  h3,  h4,  h5,  h6, p {
+    margin: 0.5em;
+  }

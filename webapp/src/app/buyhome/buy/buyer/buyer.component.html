@@ -1,0 +1,55 @@
+<!-- header -->
+<nz-breadcrumb [ngStyle]="{'margin':'1% 1%'}">
+  <nz-breadcrumb-item>
+      <a [routerLink]="['/home']" routerLinkActive="active">
+          <i nz-icon nzType="home"></i>
+          <span>Home</span>
+      </a>
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item>
+      <a [routerLink]="['/buy']" routerLinkActive="active">
+          <i nz-icon nzType="user"></i>
+          <span>Buy</span>
+      </a>
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item>
+      <a [routerLink]="['/buy/buyer']" routerLinkActive="active">
+          <i nz-icon nzType="user"></i>
+          <span>Buyer</span>
+      </a>
+  </nz-breadcrumb-item>
+</nz-breadcrumb>
+
+<!-- table -->
+<nz-table #basicTable [nzData]="listOfData">
+  <thead>
+    <tr>
+      <th>Home ID</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th>Should Pay</th>
+      <th>Already Payed Buy</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{ data.sellin.sellin_id }}</td>
+      <td>
+        <b>HomeType:</b>{{ data.home_description.home_type }}
+        <b>Location:</b>{{ data.home_description.location }}
+        <b>Area:</b>{{ data.home_description.area }}
+      </td>
+      <td>{{ data.sellin.home_status }}</td>
+      <td>{{ data.sellin.sellin_price }}</td>
+      <td>{{ data.sellin.already_pay_sell }}</td>
+      <td>
+        <a (click)="updatepay(data)">Pay</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a (click)="updatestatus(data)">Cancel</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a (click)="updatebuyinuser(data)">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

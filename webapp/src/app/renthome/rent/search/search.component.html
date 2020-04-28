@@ -1,0 +1,124 @@
+<div class="navbar nav1">
+    <!-- Nav breadcrumb -->
+    <nz-breadcrumb [ngStyle]="{'grid-column': '1/4','margin':'auto 5%'}">
+        <nz-breadcrumb-item>
+            <a [routerLink]="['/home']" routerLinkActive="active">
+                <i nz-icon nzType="home"></i>
+                <span>Home</span>
+            </a>
+        </nz-breadcrumb-item>
+        <nz-breadcrumb-item>
+            <a [routerLink]="['/rent']" routerLinkActive="active">
+                <i nz-icon nzType="user"></i>
+                <span>Rent</span>
+            </a>
+        </nz-breadcrumb-item>
+        <nz-breadcrumb-item>
+            <a [routerLink]="['/rent/search']" routerLinkActive="active">
+                <i nz-icon nzType="user"></i>
+                <span>Rent Search</span>
+            </a>
+        </nz-breadcrumb-item>
+    </nz-breadcrumb>
+    <!-- select price -->
+    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Price" [(ngModel)]="selectedprice" (ngModelChange)="search()"
+        [ngStyle]="{'grid-column': '1/2'}">
+        <nz-option nzLabel="0-200" nzValue="0-200"></nz-option>
+        <nz-option nzLabel="200-500" nzValue="200-500"></nz-option>
+        <nz-option nzLabel="500-1000" nzValue="500-1000"></nz-option>
+        <nz-option nzLabel="1000-1500" nzValue="1000-1500"></nz-option>
+        <nz-option nzLabel="1500-2000" nzValue="1500-2000"></nz-option>
+        <nz-option nzLabel="2000+" nzValue="2000-99999"></nz-option>
+    </nz-select>
+    <!-- select home type -->
+    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Home Type" [(ngModel)]="selectedhometype"
+        (ngModelChange)="search()" [ngStyle]="{'grid-column': '2/4'}">
+        <nz-option nzLabel="Apartments" nzValue="Apartments"></nz-option>
+        <nz-option nzLabel="Houses" nzValue="Houses"></nz-option>
+        <nz-option nzLabel="Condos" nzValue="Condos"></nz-option>
+        <nz-option nzLabel="Townhomes" nzValue="Townhomes"></nz-option>
+        <nz-option nzLabel="Other" nzValue="Other"></nz-option>
+    </nz-select>
+    <!-- select location -->
+    <nz-select  nzShowSearch nzAllowClear [(ngModel)]="listOfSelectedLocation" (ngModelChange)="search()" nzPlaceHolder="Location"
+         [ngStyle]="{'grid-column': '4/6'}" >
+        <nz-option *ngFor="let option of locationlist" [nzLabel]="option" [nzValue]="option"></nz-option>
+    </nz-select>
+    <ng-template #tagPlaceHolder let-locationList> and {{ locationList.length }} more selected </ng-template>
+    <!-- select others -->
+    <nz-button-group [ngClass]="{'margin-auto': true,'h-100':true}">
+        <button nz-button nz-dropdown [nzDropdownMenu]="menu1" nzType="primary"
+            [ngClass]="{'h-100': true}">More</button>
+    </nz-button-group>
+    <nz-dropdown-menu #menu1="nzDropdownMenu">
+        <ul nz-menu>
+            <li nz-menu-item>Gross Area(sqft):
+                <nz-slider nzRange [(ngModel)]="grossarea" [nzMin]="1000" [nzMax]="7500" (ngModelChange)="search()">
+                </nz-slider>
+            </li>
+            <li nz-menu-item>Bedroom Number:
+                <nz-row>
+                    <nz-col nzSpan="6">
+                        <nz-slider [nzMin]="0" [nzMax]="10" [nzStep]="1" [(ngModel)]="bedroomNum"
+                            (ngModelChange)="search()"></nz-slider>
+                    </nz-col>
+                    <nz-col nzSpan="16">
+                        <nz-input-number [nzMin]="0" [nzMax]="5" [ngStyle]="{ marginLeft: '16px' }" [nzStep]="1"
+                            [(ngModel)]="bedroomNum" nzPlaceHolder="Bedroom Number" [ngClass]="{'w-100':true}"
+                            (ngModelChange)="search()">
+                        </nz-input-number>
+                    </nz-col>
+                </nz-row>
+            </li>
+            <li nz-menu-item>Bathroom Number:
+                <nz-row>
+                    <nz-col nzSpan="6">
+                        <nz-slider [nzMin]="0" [nzMax]="10" [nzStep]="1" [(ngModel)]="bathroomNum"
+                            (ngModelChange)="search()"></nz-slider>
+                    </nz-col>
+                    <nz-col nzSpan="16">
+                        <nz-input-number [nzMin]="0" [nzMax]="5" [ngStyle]="{ marginLeft: '16px' }" [nzStep]="1"
+                            [(ngModel)]="bathroomNum" nzPlaceHolder="Bathroom Number" [ngClass]="{'w-100':true}"
+                            (ngModelChange)="search()">
+                        </nz-input-number>
+                    </nz-col>
+                </nz-row>
+            </li>
+        </ul>
+    </nz-dropdown-menu>
+    <!-- show all button -->
+    <button class="h-100" nz-button nzType="primary" type="submit" name="search" (click)="showData()"
+        style="grid-column:7/9;">
+        <i nz-icon nzType="search"></i>Show All Homes
+    </button>
+</div>
+
+<div class="bodytitle">
+    <!-- Page header-->
+    <nz-page-header nzTitle="Search Results" nzSubtitle=":"> </nz-page-header>
+    <nz-select [(ngModel)]="selectedsort" nzAllowClear nzPlaceHolder="Sort By" (ngModelChange)="sort()"
+        [ngStyle]="{ 'width': '15%','margin-left':'24px' }">
+        <nz-option nzValue="Price(low-high)" nzLabel="Price(low-high)"></nz-option>
+        <nz-option nzValue="Price(high-low)" nzLabel="Price(high-low)"></nz-option>
+        <nz-option nzValue="Bedroom Number" nzLabel="Bedroom Number"></nz-option>
+        <nz-option nzValue="Bathroom Number" nzLabel="Bathroom Number"></nz-option>
+        <nz-option nzValue="Default" nzLabel="Default"></nz-option>
+    </nz-select>
+</div>
+<div class="bodycontent">
+    <div class="grids" *ngFor="let data of homelist">
+        <nz-card nzTitle="{{data.home_description.home_type}}" [nzExtra]="extraTemplate">
+            <p>Price:{{data.home_description.price}}</p>
+            <p>Location:{{data.home_description.location}}</p>
+            <p>Address:{{data.home_description.address}}</p>
+            <p>Gross Area:{{data.home_description.area}}</p>
+            <p>Bedroom Number:{{data.home_description.bedroom_no}}</p>
+            <p>Bathroom Number:{{data.home_description.bathroom_no}}</p>
+            <p>Duration:{{data.home_description.duration}} months</p>
+            <p class="txt-right">From: <i>Hidden</i></p>
+        </nz-card>
+        <ng-template #extraTemplate>
+            <a (click)="update(data)">Rent</a>
+        </ng-template>
+    </div>
+</div>

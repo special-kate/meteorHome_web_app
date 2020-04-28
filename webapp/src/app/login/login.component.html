@@ -1,0 +1,43 @@
+<!-- <div class="container login">
+        <h3 class="text-center">login</h3>
+        <div class="form-group">
+            <p>User Name: <input type="text" [(ngModel)]="account" /></p>
+        </div>
+        <div class="form-group">
+            <p>Password: <input type="password" [(ngModel)]="password" /></p>
+        </div>
+        <div class="submit">
+        
+            <button class="btn btn-default" (click)="login()" >Login</button>
+            <a class="register" routerLink='/signup/new' routerLinkActive="active">No Account. Register</a>
+        
+        </div>
+</div> -->
+
+<div class="container login">
+    <h3 class="text-center">login</h3>
+    <div >{{msg}}</div>
+    <form nz-form class="login-form">
+        <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your username!">
+                <nz-input-group nzPrefixIcon="user">
+                    <input type="text" nz-input name="account" [(ngModel)]="account" placeholder="account" />
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your Password!">
+                <nz-input-group nzPrefixIcon="lock">
+                    <input type="password" nz-input name="password" [(ngModel)]="password" placeholder="Password" />
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control>
+                <button nz-button class="login-form-button" (click)="login()" [nzType]="'primary'">Log in</button>
+                Or
+                <a routerLink='/signup/new'>register now!</a>
+            </nz-form-control>
+        </nz-form-item>
+    </form>
+</div>

@@ -1,0 +1,56 @@
+<!-- header -->
+<nz-breadcrumb [ngStyle]="{'margin':'1% 1%'}">
+    <nz-breadcrumb-item>
+        <a [routerLink]="['/home']" routerLinkActive="active">
+            <i nz-icon nzType="home"></i>
+            <span>Home</span>
+        </a>
+    </nz-breadcrumb-item>
+    <nz-breadcrumb-item>
+        <a [routerLink]="['/rent']" routerLinkActive="active">
+            <i nz-icon nzType="user"></i>
+            <span>Rent</span>
+        </a>
+    </nz-breadcrumb-item>
+    <nz-breadcrumb-item>
+        <a [routerLink]="['/rent/renter']" routerLinkActive="active">
+            <i nz-icon nzType="user"></i>
+            <span>Renter</span>
+        </a>
+    </nz-breadcrumb-item>
+</nz-breadcrumb>
+
+<!-- table -->
+<nz-table #basicTable [nzData]="listOfData">
+    <thead>
+      <tr>
+        <th>Home ID</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Should Pay</th>
+        <th>Already Payed Rent</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{ data.rentin.rentin_id }}</td>
+        <td>
+          <b>HomeType:</b>{{ data.home_description.home_type }}
+          <b>Location:</b>{{ data.home_description.location }}
+          <b>Area:</b>{{ data.home_description.area }}
+          <b>Expired:</b>Next year {{ data.updateDate | date:'MM/dd'}}
+        </td>
+        <td>{{ data.rentin.home_status }}</td>
+        <td>{{ data.rentin.rentin_price }}*{{data.home_description.duration}}</td>
+        <td>{{ data.rentin.already_payrent }}</td>
+        <td>
+          <a (click)="updatepay(data)">Pay</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a (click)="updatestatus(data)">Cancel</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a (click)="updaterentinuser(data)">Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>

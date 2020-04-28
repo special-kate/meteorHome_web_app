@@ -1,0 +1,140 @@
+<div class="navbar nav1">
+    <!-- Nav breadcrumb -->
+    <nz-breadcrumb [ngStyle]="{'grid-column': '1/4','margin':'auto 5%'}">
+        <nz-breadcrumb-item>
+            <a [routerLink]="['/home']" routerLinkActive="active">
+                <i nz-icon nzType="home"></i>
+                <span>Home</span>
+            </a>
+        </nz-breadcrumb-item>
+        <nz-breadcrumb-item>
+            <a [routerLink]="['/buy']" routerLinkActive="active">
+                <i nz-icon nzType="user"></i>
+                <span>Buy</span>
+            </a>
+        </nz-breadcrumb-item>
+        <nz-breadcrumb-item>
+            <a [routerLink]="['/buy/searchhome']" routerLinkActive="active">
+                <i nz-icon nzType="user"></i>
+                <span>Buy Search</span>
+            </a>
+        </nz-breadcrumb-item>
+    </nz-breadcrumb>
+    <!-- select price -->
+    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Price" [(ngModel)]="selectedprice" (ngModelChange)="search()"
+        [ngStyle]="{'grid-column': '1/2'}">
+        <nz-option nzLabel="100000-200000" nzValue="100000-200000"></nz-option>
+        <nz-option nzLabel="200000-400000" nzValue="200000-400000"></nz-option>
+        <nz-option nzLabel="400000-600000" nzValue="400000-600000"></nz-option>
+        <nz-option nzLabel="600000-800000" nzValue="600000-800000"></nz-option>
+        <nz-option nzLabel="800000-1000000" nzValue="800000-1000000"></nz-option>
+        <nz-option nzLabel="1000000+" nzValue="1000000-9999999"></nz-option>
+    </nz-select>
+    <!-- select home type -->
+    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Home Type" [(ngModel)]="selectedhometype"
+        (ngModelChange)="search()" [ngStyle]="{'grid-column': '2/4'}">
+        <nz-option nzLabel="Apartments" nzValue="Apartments"></nz-option>
+        <nz-option nzLabel="Houses" nzValue="Houses"></nz-option>
+        <nz-option nzLabel="Condos" nzValue="Condos"></nz-option>
+        <nz-option nzLabel="Townhomes" nzValue="Townhomes"></nz-option>
+        <nz-option nzLabel="Other" nzValue="Other"></nz-option>
+    </nz-select>
+    <!-- select location -->
+    <nz-select nzShowSearch nzAllowClear [(ngModel)]="listOfSelectedLocation" (ngModelChange)="search()"
+        nzPlaceHolder="Location" [ngStyle]="{'grid-column': '4/6'}">
+        <nz-option *ngFor="let option of locationlist" [nzLabel]="option" [nzValue]="option"></nz-option>
+    </nz-select>
+    <ng-template #tagPlaceHolder let-locationList> and {{ locationList.length }} more selected </ng-template>
+    <!-- select others -->
+    <nz-button-group [ngClass]="{'margin-auto': true,'h-100':true}">
+        <button nz-button nz-dropdown [nzDropdownMenu]="menu1" nzType="primary"
+            [ngClass]="{'h-100': true}">More</button>
+    </nz-button-group>
+    <nz-dropdown-menu #menu1="nzDropdownMenu">
+        <ul nz-menu>
+            <li nz-menu-item>Gross Area(sqft):
+                <nz-slider nzRange [(ngModel)]="grossarea" [nzMin]="1000" [nzMax]="7500" (ngModelChange)="search()">
+                </nz-slider>
+            </li>
+            <li nz-menu-item>Bedroom Number:
+                <nz-row>
+                    <nz-col nzSpan="6">
+                        <nz-slider [nzMin]="0" [nzMax]="10" [nzStep]="1" [(ngModel)]="bedroomNum"
+                            (ngModelChange)="search()"></nz-slider>
+                    </nz-col>
+                    <nz-col nzSpan="16">
+                        <nz-input-number [nzMin]="0" [nzMax]="5" [ngStyle]="{ marginLeft: '16px' }" [nzStep]="1"
+                            [(ngModel)]="bedroomNum" nzPlaceHolder="Bedroom Number" [ngClass]="{'w-100':true}"
+                            (ngModelChange)="search()">
+                        </nz-input-number>
+                    </nz-col>
+                </nz-row>
+            </li>
+            <li nz-menu-item>Bathroom Number:
+                <nz-row>
+                    <nz-col nzSpan="6">
+                        <nz-slider [nzMin]="0" [nzMax]="10" [nzStep]="1" [(ngModel)]="bathroomNum"
+                            (ngModelChange)="search()"></nz-slider>
+                    </nz-col>
+                    <nz-col nzSpan="16">
+                        <nz-input-number [nzMin]="0" [nzMax]="5" [ngStyle]="{ marginLeft: '16px' }" [nzStep]="1"
+                            [(ngModel)]="bathroomNum" nzPlaceHolder="Bathroom Number" [ngClass]="{'w-100':true}"
+                            (ngModelChange)="search()">
+                        </nz-input-number>
+                    </nz-col>
+                </nz-row>
+            </li>
+        </ul>
+    </nz-dropdown-menu>
+    <!-- show all button -->
+    <button class="h-100" nz-button nzType="primary" type="submit" name="search" (click)="showData()"
+        style="grid-column:7/9;">
+        <i nz-icon nzType="search"></i>Show All Homes
+    </button>
+</div>
+
+<div class = "form-group">
+    <label for='place'>Search Google Place</label>
+    <input type="text" placeholder = "Input the name of address" class = "form-control" id="place" #search [formControl] = "searchControl" autocomplete="off" autocapitalize="off"
+    spellcheck="off">
+</div>
+
+<!-- show the map detail -->
+<agm-map [latitude]="latitude" [zoom]="zoom" [longitude]="longitude" [scrollwheel]="false" >
+    <agm-marker *ngFor = "let latlong of latlongs" [latitude]="latlong.latitude" [longitude]="latlong.longitude">
+        <agm-info-window>
+            <h1><strong>Buyer!</strong></h1>
+            <p>You are here!</p>
+        </agm-info-window>
+    </agm-marker>
+</agm-map>
+
+<div class="bodytitle">
+    <!-- Page header-->
+    <nz-page-header nzTitle="Search Results" nzSubtitle=":"> </nz-page-header>
+    <nz-select [(ngModel)]="selectedsort" nzAllowClear nzPlaceHolder="Sort By" (ngModelChange)="sort()"
+        [ngStyle]="{ 'width': '15%','margin-left':'24px' }">
+        <nz-option nzValue="Price(low-high)" nzLabel="Price(low-high)"></nz-option>
+        <nz-option nzValue="Price(high-low)" nzLabel="Price(high-low)"></nz-option>
+        <nz-option nzValue="Bedroom Number" nzLabel="Bedroom Number"></nz-option>
+        <nz-option nzValue="Bathroom Number" nzLabel="Bathroom Number"></nz-option>
+        <nz-option nzValue="Default" nzLabel="Default"></nz-option>
+    </nz-select>
+</div>
+
+<div class="bodycontent right">
+    <div class="grids" *ngFor="let data of homelist">
+        <nz-card nzTitle="{{data.home_description.home_type}}" [nzExtra]="extraTemplate">
+            <p>Price:{{data.home_description.price}}</p>
+            <p>Location:{{data.home_description.location}}</p>
+            <p>Gross Area:{{data.home_description.area}}</p>
+            <p>Bedroom Number:{{data.home_description.bedroom_no}}</p>
+            <p>Bathroom Number:{{data.home_description.bathroom_no}}</p>
+            
+            <p class="txt-right">From: <i>Hidden</i></p>
+        </nz-card>
+        <ng-template #extraTemplate>
+            <a (click)="update(data)">Buy</a>
+        </ng-template>
+    </div>
+</div>

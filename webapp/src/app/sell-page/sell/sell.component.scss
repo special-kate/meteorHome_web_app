@@ -1,0 +1,44 @@
+.wholepage{
+    overflow: hidden;
+    background-color: rgba(255,255,255,0.7);
+    position: absolute;
+    top:8%;
+    left:0;
+    right:0;
+    bottom:0;
+    height: 92%;
+    .main{
+        overflow: hidden;
+        height: 100%;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 15% 85%;
+        align-items: center;
+        background-color: transparent;
+        color: black;
+        font-weight: normal;
+        .left{
+            height: 100%;
+            border-right: 1px solid lightgrey;
+            li,a{
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+            .leftnavbar{
+                height:100%;
+                text-align: center;
+            }
+            .flexbar{
+                display:grid;
+            }
+
+        }   
+        
+        .right{
+            height: 100%;
+            overflow: hidden auto;
+        }
+    }
+}
+

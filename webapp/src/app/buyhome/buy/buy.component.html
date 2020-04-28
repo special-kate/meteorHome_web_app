@@ -1,0 +1,47 @@
+<div class="wholepage">
+    <div class="main">
+        <div class="left">
+            <ul nz-menu nzMode="inline" class="leftnavbar" [nzTheme]="theme ? 'dark' : 'light'">
+                <li nz-submenu nzTitle="Theme" nzIcon="eye">
+                    <ul >    
+                        <nz-switch [(ngModel)]="theme">
+                            <span checked>Dark</span>
+                            <span unchecked>Light</span>
+                        </nz-switch>
+                    </ul>
+                </li>
+                <li nz-submenu nzOpen nzTitle="Business" nzIcon="appstore">
+                    <ul>
+                        <li nz-menu-item nzSelected>
+                        <a [routerLink]="['searchhome']" routerLinkActive="active">Buyer Search</a>
+                        </li>
+                        
+                        <li nz-menu-item>
+                            <a [routerLink]="['buyer']" routerLinkActive="active">Buyer Payment</a>
+                        </li>
+                    </ul>
+                </li>
+                <li nz-submenu nzTitle="Shortcut" nzIcon="switcher">
+                    <ul>
+                        <nz-radio-group [(ngModel)]="placement" class="flexbar">
+                            <label nz-menu-item nz-radio nzValue="top">&nbsp;&nbsp;&nbsp;top&nbsp;&nbsp;&nbsp;</label>
+                            <label nz-menu-item nz-radio nzValue="right">&nbsp;&nbsp;right&nbsp;&nbsp;</label>
+                            <label nz-menu-item nz-radio nzValue="bottom">bottom</label>
+                            <label nz-menu-item nz-radio nzValue="left">&nbsp;&nbsp;&nbsp;left&nbsp;&nbsp;&nbsp;</label>
+                          </nz-radio-group>
+                          <button nz-button nzType="primary" (click)="open()">Open</button>
+                          <nz-drawer [nzClosable]="false" [nzVisible]="visible" [nzPlacement]="placement" nzTitle="Shortcut" (nzOnClose)="open()">
+                            <p><a [routerLink]="['/home']" routerLinkActive="active">Home</a></p>
+                            <p><a [routerLink]="['searchhome']" routerLinkActive="active">Buyer Search</a></p>
+                            <p><a [routerLink]="['buyer']" routerLinkActive="active">Buyer Payment</a></p>
+                          </nz-drawer>
+                    </ul>
+                </li>               
+            </ul>
+    
+        </div>
+        <div class="right">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

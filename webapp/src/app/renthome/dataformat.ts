@@ -1,0 +1,40 @@
+export interface Data{
+    user_id:string,
+    rentinuser_id:string,
+    home_description:
+      {
+        price:number,
+        home_type:string,
+        location:string,
+        address:string,
+        area:number,
+        bedroom_no:number,
+        bathroom_no:number,
+        duration:number
+      },
+    rentout:
+      {
+        rentout_id:string,
+        home_availablestatus:Boolean,
+        rentout_price:number,
+        receive_rent:number
+      },
+    rentin:
+      {
+        rentin_id:string,
+        home_status:Boolean,
+        rentin_price:number,
+        already_payrent:number
+      }
+};
+
+export interface User{
+  account:string,
+  password:string,
+  firstname:string,
+  lastname:string,
+  email:string,
+  phone:string,
+  balance:number,
+  id:string
+}

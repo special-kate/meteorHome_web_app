@@ -1,0 +1,153 @@
+<!-- header -->
+<nz-breadcrumb [ngStyle]="{'margin':'1% 1%'}">
+  <nz-breadcrumb-item>
+    <a [routerLink]="['/home']" routerLinkActive="active">
+      <i nz-icon nzType="home"></i>
+      <span>Home</span>
+    </a>
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item>
+    <a [routerLink]="['/rent']" routerLinkActive="active">
+      <i nz-icon nzType="user"></i>
+      <span>Rent</span>
+    </a>
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item>
+    <a [routerLink]="['/rent/rentalmanager']" routerLinkActive="active">
+      <i nz-icon nzType="user"></i>
+      <span>Rental Manager</span>
+    </a>
+  </nz-breadcrumb-item>
+</nz-breadcrumb>
+
+<!-- Add new button -->
+<button nz-button nzType="primary" (click)="open()" class="margin11">Add New</button>
+<nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom': '53px' }"
+  [nzMaskClosable]="false" [nzWidth]="720" [nzVisible]="visible" nzTitle="Create" (nzOnClose)="open()">
+  <form nz-form (ngSubmit)="addnew()" [formGroup]="validateForm">
+    <div nz-row nzGutter="8">
+      <!-- Price -->
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label nzRequired>Price</nz-form-label>
+          <nz-form-control nzErrorTip="Please input price!">
+            <nz-input-number [nzMin]="0" [nzMax]="100000000" [nzStep]="100" nzPlaceHolder="Price" formControlName="Formprice"
+            [ngStyle]="{ width: '100%' }" name="price">
+            </nz-input-number>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <!-- home type -->
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label nzRequired>Home Type</nz-form-label>
+          <nz-form-control nzErrorTip="Please input home type!">
+            <nz-select nzPlaceHolder="Please select an owner" name="home_type" formControlName="Formhome_type">
+              <nz-option nzLabel="Apartments" nzValue="Apartments"></nz-option>
+              <nz-option nzLabel="Houses" nzValue="Houses"></nz-option>
+              <nz-option nzLabel="Condos" nzValue="Condos"></nz-option>
+              <nz-option nzLabel="Townhomes" nzValue="Townhomes"></nz-option>
+              <nz-option nzLabel="Other" nzValue="Other"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div nz-row nzGutter="8">
+      <!-- location -->
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label nzRequired>Location</nz-form-label>
+          <nz-form-control nzErrorTip="Please input location!">
+            <nz-select nzPlaceHolder="Location" name="location" formControlName="Formlocation">
+              <nz-option *ngFor="let option of locationlist" [nzLabel]="option" [nzValue]="option"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <!-- gross area -->
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label nzRequired>Gross Area</nz-form-label>
+          <nz-form-control nzErrorTip="Please input gross area!">
+            <nz-input-number [nzMin]="1000" [nzMax]="7500" [nzStep]="50" formControlName="Formgrossarea"
+            nzPlaceHolder="Gross area(sqft)" [ngStyle]="{ width: '100%' }" name="area">
+            </nz-input-number>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div nz-row nzGutter="8">
+      <!-- bathroom number -->
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label nzRequired>Bathroom Number</nz-form-label>
+          <nz-form-control nzErrorTip="Please input bathroom number!">
+              <nz-input-number [nzMin]="0" [nzMax]="5" [nzStep]="1" nzPlaceHolder="Bathroom Number" formControlName="Formbathroom_no"
+              [ngStyle]="{ width: '100%' }" name="bathroom_no">
+              </nz-input-number>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <!-- bedroom number -->
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label nzRequired>Bedroom Number</nz-form-label>
+          <nz-form-control nzErrorTip="Please input bedroom number!">
+              <nz-input-number [nzMin]="0" [nzMax]="5" [nzStep]="1" nzPlaceHolder="Bedroom Number" formControlName="Formbedroom_no"
+              [ngStyle]="{ width: '100%' }" name="bedroom_no">
+              </nz-input-number>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div nz-row nzGutter="8">
+      <!-- address -->
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label nzRequired>Address</nz-form-label>
+          <nz-form-control nzErrorTip="Please input address!">
+            <input nz-input formControlName="Formaddress" nzPlaceHolder="Address" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div class="footer">
+      <button type="button" (click)="open()" class="ant-btn" style="margin-right: 8px;"><span>Cancel</span></button>
+      <button type="submit" class="ant-btn ant-btn-primary"><span>Submit</span></button>
+    </div>
+  </form>
+  
+</nz-drawer>
+
+<!-- table -->
+<nz-table #basicTable [nzData]="listOfData">
+  <thead>
+    <tr>
+      <th>Home ID</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th>Received Rent</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{ data.rentout.rentout_id }}</td>
+      <td>
+        <b>HomeType:</b>{{ data.home_description.home_type }}
+        <b>Location:</b>{{ data.home_description.location }}
+        <b>Address:</b>{{data.home_description.address}}
+        <b>Area:</b>{{ data.home_description.area }}
+        <b>Duration:</b>{{ data.home_description.duration }}
+      </td>
+      <td>{{ data.rentout.home_availablestatus }}</td>
+      <td>{{ data.rentout.receive_rent }}</td>
+      <td>
+        <a (click)="update(data)">Cancel</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a (click)="delete(data)">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

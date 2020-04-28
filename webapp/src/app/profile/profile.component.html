@@ -1,0 +1,88 @@
+<div class="container login">
+    <h3 class="text-center">Your Profile</h3>
+    <div >{{msg}}</div>
+    <!-- <div class="form-group"> -->
+        <!-- <p>User Name: <input type="text" [(ngModel)]="account" placeholder="Account"/></p>
+        </div>
+        <div class="form-group">
+            <p>Password: <input type="password" [(ngModel)]="password" placeholder="Password"/></p>
+        </div>
+        <div class="form-group">
+            <p>First Name: <input type="text" [(ngModel)]="firstname" placeholder="First Name"/></p>
+        </div>
+        <div class="form-group">
+            <p>Last Name: <input type="text" [(ngModel)]="lastname" placeholder="Last Name"/></p>
+        <div class="form-group">
+            <p>Email: <input type="text" [(ngModel)]="email" placeholder="Email"/></p>
+        </div>
+        <div class="form-group">
+            <p>phone number: <input type="text" [(ngModel)]="phone"  placeholder="phone number"/></p>
+        </div>
+        <div class="submit">
+            <button (click)="add()" class="btn btn-default">sign up</button>
+            <a class="register" (click)="back()">go to login</a>
+        </div> -->
+        <form nz-form>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="email">Account</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <input nz-input id="account" [(ngModel)]="account" name="account" readonly/>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="email">E-mail</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <input nz-input id="email" [(ngModel)]="email" name="email" />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" >Password</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <input [(ngModel)]="password" name="password" nz-input type="text" id="password" />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="firstname" >
+                    <span>
+                        Firstname
+                    </span>
+                </nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <input nz-input id="firstname" [(ngModel)]="firstname" name="firstname" />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="lastname" >
+                    <span>
+                        Lastname
+                    </span>
+                </nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname!">
+                    <input nz-input id="lastname" [(ngModel)]="lastname" name="lastname" />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" ><span>Phone Number</span></nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" >
+                  
+                        <input id="phoneNumber" nz-input [(ngModel)]="phone" name="phone" />
+              
+                </nz-form-control>
+            </nz-form-item>
+
+             <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" nzRequired>Balance</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please charge your balance">
+                        <input id="'balance'" nz-input [(ngModel)]="balance" name="balance" />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item nz-row class="register-area">
+                <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                    <button nz-button (click)="update()" nzType="primary">Update</button>
+                    Or
+                    <a routerLink='/home'>Back to homepage</a>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+
+    </div>

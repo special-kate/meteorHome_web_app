@@ -1,0 +1,39 @@
+<div class="navbar" role="banner">
+    <ul nz-menu nzMode="horizontal" class="bg-transparent border-0 display-flex">
+        <li nz-menu-item nzMatchRouter>
+            <a class="btn btn_w title" [routerLink]="['/buy']">Buy</a>
+        </li>
+        <li nz-menu-item nzMatchRouter>
+            <a class="btn btn_w title" [routerLink]="['/rent']">Rent</a>
+        </li>
+        <li nz-menu-item nzMatchRouter>
+            <a class="btn btn_w title" [routerLink]="['/sell']">Sell</a>
+        </li>
+        <div style="flex: 1em"></div>
+        <img width="45" src="/assets/imgs/stars.png" class="display-inline">
+        <a class="btn_w logo" [routerLink]="['/home']" routerLinkActive="active"><i>Meteor</i></a>
+        <div style="flex: 1em"></div>
+        <li nz-menu-item nzMatchRouter>
+            <a class="btn btn_w title" (click)="showModal()">Advertise</a>
+        </li>
+        <li *ngIf="!(isLoggedIn | async)" nz-menu-item nzMatchRouter>
+            <a id="log001" class="btn btn_w title" routerLink='/login'>Sign in or Join</a>
+        </li>
+        <li *ngIf="(isLoggedIn | async)" nz-submenu>
+            <span title><a class="btn btn_w title">My Meteor</a></span>
+            <ul nz-menu-group>
+                <li nz-menu-item ><a [routerLink]="['/profile']">profile</a></li>
+                <li nz-menu-item (click)="logout()">Log out</li>
+            </ul>
+
+        </li>
+        <li nz-menu-item nzMatchRouter>
+            <a class="btn btn_w title" (click)="createBasicMessage()">Help</a>
+        </li>
+    </ul>
+
+</div>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Advertise" (nzOnCancel)="handleModal()" (nzOnOk)="handleModal()">
+    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/-wym5c85VsI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</nz-modal>
